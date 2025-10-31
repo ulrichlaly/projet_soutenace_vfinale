@@ -121,4 +121,15 @@ body {
   scrollbar-width: none;
 }
 
+.stat-card {
+  @apply rounded-xl p-6 shadow-lg border border-white/20;
+}
 
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

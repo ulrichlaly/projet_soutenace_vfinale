@@ -26,7 +26,6 @@
 
         <!-- Body -->
         <form @submit.prevent="handleSubmit" class="p-6 space-y-6">
-          <!-- Sélection employé et période -->
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div class="md:col-span-1">
               <label class="block text-sm font-semibold text-gray-700 mb-2">
@@ -87,7 +86,6 @@
             </div>
           </div>
 
-          <!-- Informations salariales -->
           <div class="bg-blue-50 border-2 border-blue-200 rounded-xl p-5">
             <h4 class="font-bold text-gray-800 mb-4 flex items-center gap-2">
               <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -157,7 +155,6 @@
             </div>
           </div>
 
-          <!-- Calcul automatique -->
           <div class="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-300 rounded-xl p-5">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
               <div>
@@ -179,7 +176,6 @@
             </div>
           </div>
 
-          <!-- Commentaire -->
           <div>
             <label class="block text-sm font-semibold text-gray-700 mb-2">
               Commentaire
@@ -192,7 +188,6 @@
             ></textarea>
           </div>
 
-          <!-- Info importante -->
           <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded">
             <div class="flex items-start gap-3">
               <svg class="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -205,7 +200,6 @@
             </div>
           </div>
 
-          <!-- Erreur -->
           <div v-if="error" class="bg-red-50 border-2 border-red-200 rounded-lg p-3 flex items-start gap-2">
             <svg class="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />

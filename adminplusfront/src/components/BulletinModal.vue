@@ -26,8 +26,8 @@
         <div id="bulletin-content" class="p-8 bg-white">
           <!-- En-tête République -->
           <div class="text-center mb-8 border-b-4 border-green-600 pb-6">
-            <h1 class="text-2xl font-bold text-gray-900 mb-1">RÉPUBLIQUE DU BÉNIN</h1>
-            <p class="text-sm text-gray-600 italic mb-3">Fraternité - Justice - Travail</p>
+            <h1 class="text-2xl font-bold text-gray-900 mb-1">RAYNIS</h1>
+            <p class="text-sm text-gray-600 italic mb-3"> -  - </p>
             <h2 class="text-xl font-bold text-green-700">BULLETIN DE PAIE</h2>
             <p class="text-sm text-gray-600 mt-2">Période : {{ paie.periode }}</p>
           </div>

@@ -1,36 +1,27 @@
 <template>
   <div class="min-h-screen flex">
-    <!-- Left side - Image avec design premium -->
     <div class="hidden lg:flex lg:w-1/2 relative overflow-hidden">
-      <!-- Background image -->
       <div class="absolute inset-0" style="background-image: url('src/assets/loginimage.png'); background-size: cover; background-position: center;"></div>
       
-      <!-- Overlay bleu foncé avec dégradé -->
       <div class="absolute inset-0 bg-gradient-to-br from-blue-900/95 via-blue-800/90 to-indigo-900/95"></div>
       
-      <!-- Motif décoratif -->
       <div class="absolute inset-0 opacity-10">
         <div class="absolute top-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
         <div class="absolute bottom-0 right-0 w-96 h-96 bg-cyan-400 rounded-full blur-3xl"></div>
       </div>
 
-      <!-- Séparation ondulée moderne -->
       <div class="absolute top-0 right-0 bottom-0 w-20 z-20">
         <svg class="h-full w-full text-gray-50" viewBox="0 0 100 100" preserveAspectRatio="none">
           <path d="M0,0 C30,20 30,40 0,60 C30,70 30,90 0,100 L100,100 L100,0 Z" fill="currentColor" />
         </svg>
       </div>
 
-      <!-- Contenu avec scroll si nécessaire -->
       <div class="relative z-10 flex flex-col justify-between p-8 text-white w-full overflow-y-auto scrollbar-hide">
-        <!-- Logo et titre avec design premium -->
         <div class="mb-6">
           <div class="flex items-center gap-3">
-            <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-xl flex items-center justify-center shadow-2xl shadow-cyan-500/50 backdrop-blur-sm border border-white/20">
-              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-              </svg>
-            </div>
+        <div class="w-12 h-12 flex items-center justify-center">
+          <img src="/protection.png" alt=""></img>
+        </div>
             <div>
               <h1 class="text-2xl font-black tracking-tight">
                 Admin<span class="text-cyan-400">+</span>
@@ -40,7 +31,6 @@
           </div>
         </div>
 
-        <!-- Contenu principal avec excellent contraste -->
         <div class="flex-1 flex flex-col justify-center space-y-6">
           <div class="space-y-3">
             <h2 class="text-4xl lg:text-5xl font-black leading-tight bg-gradient-to-r from-white via-cyan-100 to-blue-100 bg-clip-text text-transparent">
@@ -53,7 +43,6 @@
             Plateforme unifiée pour la gestion des ressources humaines, présences et paies
           </p>
 
-          <!-- Fonctionnalités avec design moderne -->
           <div class="space-y-3 pt-2">
             <div class="group flex items-center gap-3 bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/20 hover:bg-white/15 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/20">
               <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-lg flex items-center justify-center flex-shrink-0 shadow-lg group-hover:shadow-cyan-400/50 transition-all duration-300">
@@ -84,7 +73,6 @@
           </div>
         </div>
 
-        <!-- Footer -->
         <div class="flex items-center justify-between pt-6 border-t border-white/20 mt-6">
           <p class="text-xs font-medium text-cyan-200">© 2025 Admin+ Bénin</p>
           <p class="text-xs font-medium text-cyan-300">Tous droits réservés</p>
@@ -92,16 +80,12 @@
       </div>
     </div>
 
-    <!-- Right side - Form avec design épuré -->
     <div class="w-full lg:w-1/2 flex items-center justify-center p-6 lg:p-8 bg-gradient-to-br from-gray-50 to-blue-50/30 overflow-y-auto">
       <div class="w-full max-w-md my-auto">
-        <!-- Mobile Logo -->
         <div class="lg:hidden flex items-center justify-center gap-3 mb-8">
-          <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-xl flex items-center justify-center shadow-xl shadow-blue-500/30">
-            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-            </svg>
-          </div>
+        <div class="w-12 h-12 flex items-center justify-center">
+          <img src="/protection.png" alt=""></img>
+        </div>
           <div>
             <h1 class="text-2xl font-black text-gray-900">Admin<span class="text-blue-600">+</span></h1>
             <p class="text-xs font-semibold text-gray-500">République du Bénin</p>
@@ -115,7 +99,6 @@
           </div>
 
           <form @submit.prevent="handleLogin" class="space-y-5">
-            <!-- Email -->
             <div>
               <label class="block text-sm font-bold text-gray-700 mb-2">
                 Adresse email
@@ -131,12 +114,11 @@
                   type="email"
                   required
                   class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all font-medium text-gray-900 placeholder-gray-400"
-                  placeholder="votre.email@benin.gov"
+                  placeholder="email"
                 />
               </div>
             </div>
 
-            <!-- Password -->
             <div>
               <label class="block text-sm font-bold text-gray-700 mb-2">
                 Mot de passe
@@ -170,7 +152,6 @@
               </div>
             </div>
 
-            <!-- Options -->
             <div class="flex items-center justify-between">
               <label class="flex items-center cursor-pointer group">
                 <input
@@ -185,7 +166,6 @@
               </a>
             </div>
 
-            <!-- Message d'erreur -->
             <div v-if="errorMessage" class="bg-red-50 border-2 border-red-200 rounded-xl p-3 flex items-start gap-2">
               <svg class="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -193,7 +173,6 @@
               <p class="text-red-700 text-sm font-semibold">{{ errorMessage }}</p>
             </div>
 
-            <!-- Bouton de connexion -->
             <button
               type="submit"
               :disabled="loading"
@@ -210,7 +189,6 @@
             </button>
           </form>
 
-          <!-- Support -->
           <div class="mt-6 text-center">
             <p class="text-sm text-gray-600 font-medium">
               Besoin d'assistance ?
@@ -221,7 +199,6 @@
           </div>
         </div>
 
-        <!-- Footer -->
         <div class="mt-6 text-center">
           <p class="text-xs text-gray-500 font-medium">
             Sécurisé par Admin+ • Protection des données
@@ -236,6 +213,7 @@
 import { ref } from "vue";
 import api from "../services/api/axios";
 import router from "../router";
+import { getRoleDashboard } from "../router/roleRedirect";
 
 const email = ref("");
 const password = ref("");
@@ -256,10 +234,20 @@ const handleLogin = async () => {
 
     if (response.data && response.data.access_token) {
       localStorage.setItem("token", response.data.access_token);
-      localStorage.setItem("user", JSON.stringify(response.data.user));
-      router.push("/dashboard");
+      
+      const user = response.data.user;
+      localStorage.setItem("user", JSON.stringify(user));
+
+      const userRole = user.role || 'Collaborateur';
+      console.log('Rôle de l\'utilisateur:', userRole);
+      
+      const dashboardRoute = getRoleDashboard(userRole);
+      console.log('Redirection vers:', dashboardRoute);
+      
+      await router.push(dashboardRoute);
+      
     } else {
-      errorMessage.value = "Identifiants incorrects. Veuillez réessayer.";
+      errorMessage.value = "Réponse du serveur invalide. Veuillez réessayer.";
     }
   } catch (error: any) {
     console.error("Erreur de connexion:", error);
@@ -268,8 +256,10 @@ const handleLogin = async () => {
       errorMessage.value = "Identifiants incorrects. Veuillez réessayer.";
     } else if (error.response?.data?.message) {
       errorMessage.value = error.response.data.message;
+    } else if (error.message === 'Network Error') {
+      errorMessage.value = "Impossible de se connecter au serveur. Vérifiez votre connexion.";
     } else {
-      errorMessage.value = "Erreur de connexion au serveur. Veuillez réessayer.";
+      errorMessage.value = "Erreur de connexion. Veuillez réessayer.";
     }
   } finally {
     loading.value = false;

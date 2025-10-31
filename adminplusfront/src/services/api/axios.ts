@@ -11,7 +11,7 @@ const api = axios.create({
   withCredentials: true,
 });
 
-// Intercepteur pour le token
+// Intercepteur pour ajouter le token d'authentification
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
   if (token && config.headers) {
@@ -27,7 +27,6 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       console.warn('Non autorisé — 401');
       localStorage.removeItem('token');
-      // tu peux rediriger vers login ici si tu veux
     }
     return Promise.reject(error);
   }

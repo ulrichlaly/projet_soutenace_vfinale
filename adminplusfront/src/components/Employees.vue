@@ -71,7 +71,6 @@
         </div>
       </div>
 
-      <!-- Tableau -->
       <div v-else class="overflow-x-auto">
         <table class="w-full">
           <thead class="bg-gray-50 border-b border-gray-100">
