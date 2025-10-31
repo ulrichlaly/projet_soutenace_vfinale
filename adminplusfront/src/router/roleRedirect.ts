@@ -1,12 +1,12 @@
 
 export const getRoleDashboard = (role: string): string => {
   const roleRoutes: Record<string, string> = {
-    'Admin': '/admin/dashboard',
-    'Administrateur': '/admin/dashboard',
-    'Admin Général': '/admin/dashboard',
+    'Admin': '/dashboard',
+    'Administrateur': '/dashboard',
+    'Admin Général': '/dashboard',
     'RH': '/rh/dashboard',
     'Comptable': '/comptable/dashboard',
-    'Collaborateur': '/collaborateur/dashboard',
+    'Collaborateur': '/dashboard',
   };
 
   return roleRoutes[role] || '/collaborateur/dashboard';

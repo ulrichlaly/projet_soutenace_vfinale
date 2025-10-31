@@ -23,7 +23,6 @@ const routes = [
         name: 'dashboard-home',
         component: () => import('../components/DashboardRouter.vue')
       },
-      // Routes Admin uniquement
       {
         path: 'employees',
         name: 'employees',

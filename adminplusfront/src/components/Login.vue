@@ -244,7 +244,8 @@ const handleLogin = async () => {
       const dashboardRoute = getRoleDashboard(userRole);
       console.log('Redirection vers:', dashboardRoute);
       
-      await router.push(dashboardRoute);
+      await router.replace(dashboardRoute);
+      location.reload()
       
     } else {
       errorMessage.value = "Réponse du serveur invalide. Veuillez réessayer.";
