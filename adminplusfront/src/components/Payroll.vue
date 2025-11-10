@@ -134,7 +134,7 @@
         <table class="w-full">
           <thead class="bg-gray-50 border-b border-gray-100">
             <tr>
-              <th class="text-left py-4 px-6 text-xs font-semibold text-gray-600 uppercase">Employé</th>
+              <th class="text-left py-4 px-6 text-xs font-semibold text-gray-600 uppercase">Collaborateur</th>
               <th class="text-left py-4 px-6 text-xs font-semibold text-gray-600 uppercase">Département</th>
               <th class="text-left py-4 px-6 text-xs font-semibold text-gray-600 uppercase">Salaire Brut</th>
               <th class="text-left py-4 px-6 text-xs font-semibold text-gray-600 uppercase">Déductions</th>

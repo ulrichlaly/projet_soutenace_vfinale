@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Role extends Model
 {
@@ -16,10 +15,10 @@ class Role extends Model
     ];
 
     /**
-     * Un rôle peut être attribué à plusieurs utilisateurs.
+     * Relation Many-to-Many avec les utilisateurs
      */
     public function users()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsToMany(User::class, 'role_user', 'role_id', 'user_id');
     }
 }

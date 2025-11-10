@@ -17,23 +17,9 @@
       </div>
 
       <div class="relative z-10 flex flex-col justify-between p-8 text-white w-full overflow-y-auto scrollbar-hide">
-        <div class="mb-6">
-          <div class="flex items-center gap-3">
-        <div class="w-12 h-12 flex items-center justify-center">
-          <img src="/protection.png" alt=""></img>
-        </div>
-            <div>
-              <h1 class="text-2xl font-black tracking-tight">
-                Admin<span class="text-cyan-400">+</span>
-              </h1>
-              <p class="text-xs font-medium text-cyan-300">République du Bénin</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="flex-1 flex flex-col justify-center space-y-6">
+         <div class="flex-1 flex flex-col justify-center space-y-6">
           <div class="space-y-3">
-            <h2 class="text-4xl lg:text-5xl font-black leading-tight bg-gradient-to-r from-white via-cyan-100 to-blue-100 bg-clip-text text-transparent">
+            <h2 class="text-4xl lg:text-5xl font-black leading-tight bg-gradient-to-r from-white via-cyan-100 to-white bg-clip-text text-transparent">
               Système de Gestion<br />Administrative
             </h2>
             <div class="w-20 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"></div>
@@ -74,31 +60,27 @@
         </div>
 
         <div class="flex items-center justify-between pt-6 border-t border-white/20 mt-6">
-          <p class="text-xs font-medium text-cyan-200">© 2025 Admin+ Bénin</p>
+          <p class="text-xs font-medium text-cyan-200">© 2025 PAYZEN Bénin</p>
           <p class="text-xs font-medium text-cyan-300">Tous droits réservés</p>
         </div>
       </div>
     </div>
 
-    <div class="w-full lg:w-1/2 flex items-center justify-center p-6 lg:p-8 bg-gradient-to-br from-gray-50 to-blue-50/30 overflow-y-auto">
-      <div class="w-full max-w-md my-auto">
-        <div class="lg:hidden flex items-center justify-center gap-3 mb-8">
-        <div class="w-12 h-12 flex items-center justify-center">
-          <img src="/protection.png" alt=""></img>
-        </div>
-          <div>
-            <h1 class="text-2xl font-black text-gray-900">Admin<span class="text-blue-600">+</span></h1>
-            <p class="text-xs font-semibold text-gray-500">République du Bénin</p>
+    <div class="w-full lg:w-1/2 flex items-center justify-center p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-gray-50 to-blue-50/30 overflow-y-auto">
+      <div class="w-full max-w-md">
+        <div class="flex items-center justify-center mb-2">
+          <div class="w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 flex items-center justify-center">
+            <img src="/LogoPAYZEN.png" alt="PAYZEN Logo" class="w-full h-full object-contain"></img>
           </div>
         </div>
 
-        <div class="bg-white rounded-2xl shadow-2xl shadow-blue-500/10 p-8 border border-gray-100">
-          <div class="mb-8">
-            <h2 class="text-3xl font-black text-gray-900 mb-2">Connexion</h2>
-            <p class="text-gray-600 font-medium">Accédez à votre espace de gestion</p>
+        <div class="bg-white rounded-2xl shadow-2xl shadow-blue-500/10 p-6 sm:p-8 border border-gray-100">
+          <div class="mb-6 sm:mb-8">
+            <h2 class="text-2xl sm:text-3xl font-black text-gray-900 mb-2">Connexion</h2>
+            <p class="text-sm sm:text-base text-gray-600 font-medium">Accédez à votre espace de gestion</p>
           </div>
 
-          <form @submit.prevent="handleLogin" class="space-y-5">
+          <form @submit.prevent="handleLogin" class="space-y-4 sm:space-y-5">
             <div>
               <label class="block text-sm font-bold text-gray-700 mb-2">
                 Adresse email
@@ -199,9 +181,9 @@
           </div>
         </div>
 
-        <div class="mt-6 text-center">
-          <p class="text-xs text-gray-500 font-medium">
-            Sécurisé par Admin+ • Protection des données
+        <div class="mt-4 sm:mt-6 text-center">
+          <p class="text-xs sm:text-sm text-gray-500 font-medium">
+            Sécurisé par PAYZEN • Protection des données
           </p>
         </div>
       </div>

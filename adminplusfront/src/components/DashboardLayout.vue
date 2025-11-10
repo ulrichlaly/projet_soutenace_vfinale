@@ -1,16 +1,15 @@
 <template>
-  <div class="min-h-screen flex bg-gray-50">
+  <div class="h-screen flex bg-gray-50 overflow-hidden">
     <Sidebar />
     
-    <div class="flex-1 flex flex-col">
-      <!-- Header -->
-      <header class="bg-white border-b border-gray-200 px-6 py-4 sticky top-0 z-10">
+    <div class="flex-1 flex flex-col overflow-hidden">
+      <!-- Header fixe -->
+      <header class="bg-white border-b border-gray-200 px-6 py-4 flex-shrink-0">
         <div class="flex items-center justify-between">
           <div>
             <h2 class="text-2xl font-bold text-gray-900">{{ pageTitle }}</h2>
             <p class="text-sm text-gray-500">{{ currentDate }}</p>
           </div>
-          
           <div class="flex items-center gap-3">
             <div class="text-right">
               <p class="text-sm font-bold text-gray-900">{{ authStore.user?.fullname }}</p>
@@ -22,9 +21,9 @@
           </div>
         </div>
       </header>
-      
-      <!-- Contenu principal -->
-      <main class="flex-1 p-6 overflow-y-auto">
+
+      <!-- Contenu principal scrollable -->
+      <main class="flex-1 overflow-y-auto p-6">
         <router-view />
       </main>
     </div>

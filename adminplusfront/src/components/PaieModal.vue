@@ -13,7 +13,7 @@
               </svg>
               <div>
                 <h3 class="text-xl font-bold">Générer une paie</h3>
-                <p class="text-sm text-green-100">Créer une fiche de paie pour un employé</p>
+                <p class="text-sm text-green-100">Créer une fiche de paie pour un collaborateur</p>
               </div>
             </div>
             <button @click="$emit('close')" class="p-2 hover:bg-white hover:bg-opacity-20 rounded-lg transition-colors text-white">
@@ -29,7 +29,7 @@
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div class="md:col-span-1">
               <label class="block text-sm font-semibold text-gray-700 mb-2">
-                Employé <span class="text-red-500">*</span>
+                Collaborateur <span class="text-red-500">*</span>
               </label>
               <select
                 v-model="formData.collaborator_id"

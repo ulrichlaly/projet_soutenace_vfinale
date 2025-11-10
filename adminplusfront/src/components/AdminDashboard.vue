@@ -16,7 +16,7 @@
       <div class="stat-card bg-gradient-to-br from-blue-500 to-blue-600 text-white">
         <div class="flex items-start justify-between">
           <div>
-            <p class="text-sm opacity-90 mb-1">Employés</p>
+            <p class="text-sm opacity-90 mb-1">Collaborateurs</p>
             <h3 class="text-4xl font-bold mb-2">{{ stats.total_employees || 0 }}</h3>
             <p class="text-xs opacity-75">Total actif</p>
           </div>
@@ -73,7 +73,7 @@
           <svg class="w-8 h-8 text-gray-400 group-hover:text-blue-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
           </svg>
-          <p class="text-sm font-semibold text-gray-700 group-hover:text-blue-600">Ajouter employé</p>
+          <p class="text-sm font-semibold text-gray-700 group-hover:text-blue-600">Ajouter collaborateur</p>
         </router-link>
 
         <router-link to="/dashboard/payroll" class="p-4 border-2 border-gray-200 rounded-lg hover:border-green-500 hover:bg-green-50 transition-all group">
@@ -104,7 +104,7 @@
         <h3 class="text-lg font-bold text-gray-900 mb-4">Vue d'ensemble</h3>
         <div class="space-y-3">
           <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-            <span class="text-sm text-gray-700">Employés actifs</span>
+            <span class="text-sm text-gray-700">Collaborateurs actifs</span>
             <span class="font-bold text-gray-900">{{ stats.total_employees }}</span>
           </div>
           <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
@@ -123,7 +123,7 @@
         <div class="space-y-2">
           <router-link to="/dashboard/employees" class="block p-3 hover:bg-gray-50 rounded-lg transition-colors">
             <p class="text-sm font-semibold text-gray-900">Gestion du personnel</p>
-            <p class="text-xs text-gray-500">Gérer les employés, contrats, informations</p>
+            <p class="text-xs text-gray-500">Gérer les collaborateurs, contrats, informations</p>
           </router-link>
           <router-link to="/dashboard/payroll" class="block p-3 hover:bg-gray-50 rounded-lg transition-colors">
             <p class="text-sm font-semibold text-gray-900">Paie et bulletins</p>

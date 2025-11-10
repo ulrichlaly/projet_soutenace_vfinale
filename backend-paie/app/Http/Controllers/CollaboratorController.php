@@ -102,16 +102,30 @@ class CollaboratorController extends Controller
         try {
             $defaultPassword = 'Password123!';
 
-            // Créer l'utilisateur
+            // Récupérer l'ID du rôle "Collaborateur" depuis la base de données
+            $collaboratorRole = \App\Models\Role::where('name', 'Collaborateur')
+                ->orWhere('name', 'Employé')
+                ->orWhere('name', 'Employee')
+                ->first();
+
+            if (!$collaboratorRole) {
+                // Si le rôle n'existe pas, utiliser l'ID 4 par défaut
+                $roleId = 4;
+            } else {
+                $roleId = $collaboratorRole->id;
+            }
+
+            // Créer l'utilisateur avec role_id
             $user = User::create([
                 'fullname' => $request->fullname,
                 'email' => $request->email,
                 'password' => Hash::make($defaultPassword),
                 'tel' => $request->telephone,
+                'role_id' => $roleId, // ✅ CORRECTION: Ajout du role_id
             ]);
 
-            // Assigner le rôle Collaborateur (ID 4)
-            $user->roles()->attach(4);
+            // Assigner aussi le rôle via la table pivot (pour la relation Many-to-Many)
+            $user->roles()->attach($roleId);
 
             // Générer un matricule unique
             $matricule = 'COL-' . str_pad(Collaborator::count() + 1, 4, '0', STR_PAD_LEFT);
@@ -140,6 +154,7 @@ class CollaboratorController extends Controller
                 'statut' => 'actif',
             ]);
 
+            // Envoi de l'email avec les identifiants
             try {
                 Mail::to($user->email)->send(new NouvelEmployeCredentials(
                     $user,
@@ -148,6 +163,7 @@ class CollaboratorController extends Controller
                 ));
             } catch (\Exception $e) {
                 Log::error('Erreur envoi email: ' . $e->getMessage());
+                // On continue même si l'email échoue
             }
 
             DB::commit();
