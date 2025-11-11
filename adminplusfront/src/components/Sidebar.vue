@@ -2,6 +2,7 @@
   <aside
     class="w-64 bg-white border-r border-gray-200 flex flex-col h-screen flex-shrink-0"
   >
+    <!-- Logo -->
     <div class="px-4 py-2 border-b border-gray-200 flex-shrink-0">
       <div class="flex items-center">
         <div class="w-22 h-22 flex items-center justify-center">
@@ -11,15 +12,10 @@
             class="w-full h-full object-contain"
           />
         </div>
-        <!-- <div>
-          <h1 class="text-xl font-bold text-gray-900">
-            Admin<span class="text-blue-600">+</span>
-          </h1>
-          <p class="text-xs text-gray-500">Bénin RH</p>
-        </div> -->
       </div>
     </div>
 
+    <!-- Profil utilisateur -->
     <div class="p-4 border-b border-gray-200 flex-shrink-0">
       <div class="flex items-center gap-3">
         <div
@@ -41,22 +37,31 @@
       </div>
     </div>
 
+    <!-- Navigation -->
     <nav class="flex-1 overflow-y-auto p-4 scrollbar-hide">
       <div class="space-y-1">
-        <router-link
-          v-for="item in navigationItems"
-          :key="item.path"
-          :to="item.path"
-          class="nav-item"
-          active-class="nav-item-active"
-          exact-active-class="nav-item-active"
-        >
-          <component :is="item.icon" class="w-5 h-5" />
-          <span>{{ item.label }}</span>
-        </router-link>
+<router-link
+  v-for="item in navigationItems"
+  :key="item.path"
+  :to="item.path"
+  class="nav-item"
+  :active-class="item.path === '/dashboard' ? '' : 'nav-item-active'"
+  :exact-active-class="item.path === '/dashboard' ? 'nav-item-active' : ''"
+>
+  <component :is="item.icon" class="w-5 h-5" />
+  <span>{{ item.label }}</span>
+  <span
+    v-if="item.badge"
+    class="ml-auto bg-red-500 text-white text-xs px-2 py-0.5 rounded-full font-bold"
+  >
+    {{ item.badge }}
+  </span>
+</router-link>
+
       </div>
     </nav>
 
+    <!-- Déconnexion -->
     <div class="p-4 border-t border-gray-200 space-y-3 flex-shrink-0">
       <button
         @click="logout"
@@ -102,13 +107,14 @@ const userInitials = computed(() => {
 
 const roleClass = computed(() => {
   const role = user?.role;
-  if (role === "Admin" || role === "Administrateur")
+  if (role === "Admin" || role === "Administrateur" || role === "Admin Général")
     return "bg-purple-100 text-purple-700";
   if (role === "Comptable") return "bg-green-100 text-green-700";
   if (role === "Collaborateur") return "bg-blue-100 text-blue-700";
   return "bg-gray-100 text-gray-700";
 });
 
+// 🎨 ICÔNES
 const DashboardIcon = () =>
   h("svg", { fill: "none", stroke: "currentColor", viewBox: "0 0 24 24" }, [
     h("path", {
@@ -179,60 +185,81 @@ const BulletinIcon = () =>
     }),
   ]);
 
+// 🆕 NOUVELLES ICÔNES
+const ExpenseIcon = () =>
+  h("svg", { fill: "none", stroke: "currentColor", viewBox: "0 0 24 24" }, [
+    h("path", {
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      "stroke-width": "2",
+      d: "M9 8h6m-5 0a3 3 0 110 6H9l3 3m-3-6h6m6 1a9 9 0 11-18 0 9 9 0 0118 0z",
+    }),
+  ]);
+
+const AdvanceIcon = () =>
+  h("svg", { fill: "none", stroke: "currentColor", viewBox: "0 0 24 24" }, [
+    h("path", {
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      "stroke-width": "2",
+      d: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
+    }),
+  ]);
+
+const TrainingIcon = () =>
+  h("svg", { fill: "none", stroke: "currentColor", viewBox: "0 0 24 24" }, [
+    h("path", {
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      "stroke-width": "2",
+      d: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253",
+    }),
+  ]);
+
+// ✅ NAVIGATION PAR RÔLE
 const navigationItems = computed(() => {
   const role = user?.role;
+  const roles = user?.roles || [];
 
-  if (role === "Admin" || role === "Administrateur") {
+  const isAdmin = role === "Admin" || 
+                  role === "Administrateur" || 
+                  role === "Admin Général" ||
+                  roles.includes("Admin") ||
+                  roles.includes("Administrateur") ||
+                  roles.includes("Admin Général");
+
+  const isComptable = role === "Comptable" || roles.includes("Comptable");
+  const isCollaborateur = role === "Collaborateur" || roles.includes("Collaborateur");
+
+  // 👨‍💼 NAVIGATION ADMIN
+  if (isAdmin) {
     return [
       { path: "/dashboard", label: "Tableau de bord", icon: DashboardIcon },
-      {
-        path: "/dashboard/employees",
-        label: "Gestion du personnel",
-        icon: UsersIcon,
-      },
-      {
-        path: "/dashboard/payroll",
-        label: "Paie et bulletins",
-        icon: PayrollIcon,
-      },
-      {
-        path: "/dashboard/declarations",
-        label: "Déclarations",
-        icon: DeclarationIcon,
-      },
-      {
-        path: "/dashboard/leaves",
-        label: "Congés et absences",
-        icon: LeaveIcon,
-      },
+      { path: "/dashboard/employees", label: "Gestion du personnel", icon: UsersIcon },
+      { path: "/dashboard/payroll", label: "Paie et bulletins", icon: PayrollIcon },
+      { path: "/dashboard/declarations", label: "Déclarations", icon: DeclarationIcon },
+      { path: "/dashboard/leaves", label: "Congés et absences", icon: LeaveIcon },
     ];
   }
 
-  if (role === "Comptable") {
+  // 💰 NAVIGATION COMPTABLE
+  if (isComptable) {
     return [
       { path: "/dashboard", label: "Tableau de bord", icon: DashboardIcon },
-      {
-        path: "/dashboard/payroll",
-        label: "Paie et bulletins",
-        icon: PayrollIcon,
-      },
-      {
-        path: "/dashboard/declarations",
-        label: "Déclarations",
-        icon: DeclarationIcon,
-      },
+      { path: "/dashboard/payroll", label: "Paie et bulletins", icon: PayrollIcon },
+      { path: "/dashboard/declarations", label: "Déclarations", icon: DeclarationIcon },
       { path: "/dashboard/leaves", label: "Congés", icon: LeaveIcon },
     ];
   }
 
+  // 👤 NAVIGATION COLLABORATEUR (avec nouveaux modules)
   return [
     { path: "/dashboard", label: "Mon espace", icon: DashboardIcon },
-    {
-      path: "/dashboard/my-bulletins",
-      label: "Mes bulletins",
-      icon: BulletinIcon,
-    },
+    { path: "/dashboard/my-bulletins", label: "Mes bulletins", icon: BulletinIcon },
     { path: "/dashboard/my-leaves", label: "Mes congés", icon: LeaveIcon },
+    { path: "/dashboard/my-expenses", label: "Notes de frais", icon: ExpenseIcon, badge: 0 },
+    { path: "/dashboard/my-advances", label: "Avances salaire", icon: AdvanceIcon, badge: 0 },
+    { path: "/dashboard/my-trainings", label: "Formations & Entretiens", icon: TrainingIcon, badge: 0 },
     { path: "/dashboard/profile", label: "Mon profil", icon: ProfileIcon },
   ];
 });
@@ -257,12 +284,10 @@ const logout = async () => {
   @apply flex items-center gap-3 px-4 py-3 text-gray-700 rounded-lg transition-colors font-medium hover:bg-gray-100 hover:text-gray-900;
 }
 
-/* Couleur pour l’élément actif */
 .nav-item-active {
   @apply bg-blue-600 text-white font-semibold;
 }
 
-/* Empêche le hover de changer la couleur sur l’élément actif */
 .nav-item-active:hover {
   @apply bg-blue-600 text-white;
 }

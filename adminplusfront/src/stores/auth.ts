@@ -14,13 +14,31 @@ interface User {
 export const useAuthStore = defineStore('auth', () => {
   const user = ref<User | null>(null);
   const token = ref<string | null>(localStorage.getItem('token'));
-
+  
   const isAuthenticated = computed(() => !!token.value);
-  const userRole = computed(() => user.value?.role || 'Collaborateur');
-  const userRoles = computed(() => user.value?.roles || []);
+  
+  // CORRECTION: S'assurer que userRole renvoie toujours une valeur
+  const userRole = computed(() => {
+    if (!user.value) return 'Collaborateur';
+    return user.value.role || 'Collaborateur';
+  });
+  
+  // CORRECTION: S'assurer que userRoles renvoie toujours un tableau
+  const userRoles = computed(() => {
+    if (!user.value) return [];
+    // Si roles est vide mais role existe, utiliser role comme fallback
+    if (user.value.roles && user.value.roles.length > 0) {
+      return user.value.roles;
+    }
+    // Fallback: si pas de roles array, utiliser le role string
+    if (user.value.role) {
+      return [user.value.role];
+    }
+    return [];
+  });
   
   const isAdmin = computed(() => {
-    const roles = user.value?.roles || [];
+    const roles = userRoles.value;
     return roles.some(role => 
       role === 'Admin' || 
       role === 'Administrateur' || 
@@ -29,12 +47,12 @@ export const useAuthStore = defineStore('auth', () => {
   });
   
   const isComptable = computed(() => {
-    const roles = user.value?.roles || [];
+    const roles = userRoles.value;
     return roles.includes('Comptable');
   });
   
   const isCollaborateur = computed(() => {
-    const roles = user.value?.roles || [];
+    const roles = userRoles.value;
     return roles.includes('Collaborateur');
   });
 
@@ -45,16 +63,22 @@ export const useAuthStore = defineStore('auth', () => {
       console.log('=== RÉPONSE LOGIN ===');
       console.log('Response:', response.data);
       
-      // CORRECTION : Le backend retourne 'access_token', pas 'token'
+      // Le backend retourne 'access_token'
       token.value = response.data.access_token;
       localStorage.setItem('token', response.data.access_token);
       
-      // Stocker l'utilisateur
-      user.value = response.data.user;
-      localStorage.setItem('user', JSON.stringify(response.data.user));
+      // Normaliser l'utilisateur pour s'assurer que roles est toujours un array
+      const userData = response.data.user;
+      user.value = {
+        ...userData,
+        roles: userData.roles || (userData.role ? [userData.role] : [])
+      };
+      
+      localStorage.setItem('user', JSON.stringify(user.value));
       
       console.log('User après login:', user.value);
-      console.log('Rôles:', user.value?.roles);
+      console.log('Rôle principal:', userRole.value);
+      console.log('Tous les rôles:', userRoles.value);
       console.log('isAdmin:', isAdmin.value);
       console.log('isComptable:', isComptable.value);
       console.log('isCollaborateur:', isCollaborateur.value);
@@ -70,13 +94,20 @@ export const useAuthStore = defineStore('auth', () => {
   const fetchUser = async () => {
     try {
       const response = await api.get('/me');
-      user.value = response.data;
-      localStorage.setItem('user', JSON.stringify(response.data));
+      
+      // Normaliser l'utilisateur
+      const userData = response.data;
+      user.value = {
+        ...userData,
+        roles: userData.roles || (userData.role ? [userData.role] : [])
+      };
+      
+      localStorage.setItem('user', JSON.stringify(user.value));
       
       console.log('User après fetchUser:', user.value);
-      console.log('Rôles après fetchUser:', user.value?.roles);
+      console.log('Rôles après fetchUser:', userRoles.value);
       
-      return response.data;
+      return user.value;
     } catch (error) {
       console.error('Erreur récupération utilisateur:', error);
       logout();
@@ -101,10 +132,18 @@ export const useAuthStore = defineStore('auth', () => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       try {
-        user.value = JSON.parse(storedUser);
-        console.log('User restauré depuis localStorage:', user.value);
+        const parsedUser = JSON.parse(storedUser);
+        // Normaliser l'utilisateur restauré
+        user.value = {
+          ...parsedUser,
+          roles: parsedUser.roles || (parsedUser.role ? [parsedUser.role] : [])
+        };
+        
+        console.log('✅ User restauré depuis localStorage:', user.value);
+        console.log('   - Rôle principal:', userRole.value);
+        console.log('   - Tous les rôles:', userRoles.value);
       } catch (error) {
-        console.error('Erreur restauration utilisateur:', error);
+        console.error('❌ Erreur restauration utilisateur:', error);
         localStorage.removeItem('user');
       }
     }

@@ -21,10 +21,16 @@ class AuthController extends Controller
             return response()->json(['message' => 'Identifiants invalides'], 401);
         }
 
+        // Charger les rôles
         $user->load('roles');
-
         $roleNames = $user->roles->pluck('name')->toArray();
-        $primaryRole = !empty($roleNames) ? $roleNames[0] : 'Collaborateur';
+        
+        // Si aucun rôle n'est assigné, utiliser 'Collaborateur' par défaut
+        if (empty($roleNames)) {
+            $roleNames = ['Collaborateur'];
+        }
+        
+        $primaryRole = $roleNames[0];
 
         $token = $user->createToken('auth_token')->accessToken;
 
@@ -43,9 +49,42 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * Récupérer l'utilisateur authentifié
+     */
+    public function me(Request $request)
+    {
+        $user = $request->user();
+        
+        if (!$user) {
+            return response()->json(['message' => 'Non authentifié'], 401);
+        }
+
+        // Charger les rôles
+        $user->load('roles');
+        $roleNames = $user->roles->pluck('name')->toArray();
+        
+        // Si aucun rôle n'est assigné, utiliser 'Collaborateur' par défaut
+        if (empty($roleNames)) {
+            $roleNames = ['Collaborateur'];
+        }
+        
+        $primaryRole = $roleNames[0];
+
+        return response()->json([
+            'id' => $user->id,
+            'fullname' => $user->fullname,
+            'email' => $user->email,
+            'tel' => $user->tel,
+            'role' => $primaryRole,
+            'roles' => $roleNames,
+        ]);
+    }
+
     public function logout(Request $request)
     {
         $request->user()->token()->revoke();
+        
         return response()->json(['message' => 'Déconnexion réussie']);
     }
 }
